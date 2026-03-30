@@ -1,32 +1,50 @@
-const questions = [
-    {
-        question: "What is the primary purpose of an aircraft landing gear shock strut?",
-        answers: {
-            A: "To support the aircraft during flight",
-            B: "To absorb landing impact and provide a smooth ride",
-            C: "To increase aerodynamic lift",
-            D: "To reduce brake wear"
-        },
-        correct: "B"
-    },
-    {
-        question: "What type of tire construction uses overlapping plies at alternating angles?",
-        answers: {
-            A: "Radial",
-            B: "Bias-ply",
-            C: "Tubeless",
-            D: "Retread"
-        },
-        correct: "B"
-    },
-    {
-        question: "What component prevents wheel rotation during brake application?",
-        answers: {
-            A: "Torque link",
-            B: "Shimmy damper",
-            C: "Axle nut",
-            D: "Anti-skid valve"
-        },
-        correct: "A"
+let current = 0;
+
+function loadQuestion() {
+    const q = questions[current];
+    document.getElementById("question-text").textContent = q.question;
+
+    document.getElementById("A").textContent = "A: " + q.answers.A;
+    document.getElementById("B").textContent = "B: " + q.answers.B;
+    document.getElementById("C").textContent = "C: " + q.answers.C;
+    document.getElementById("D").textContent = "D: " + q.answers.D;
+
+    document.querySelectorAll(".answer-btn").forEach(btn => {
+        btn.classList.remove("correct", "wrong");
+        btn.disabled = false;
+    });
+}
+
+function checkAnswer(letter) {
+    const q = questions[current];
+    const btn = document.getElementById(letter);
+
+    if (letter === q.correct) {
+        btn.classList.add("correct");
+        document.getElementById("status").textContent = "Correct!";
+        current++;
+
+        setTimeout(() => {
+            if (current < questions.length) {
+                loadQuestion();
+            } else {
+                document.getElementById("status").textContent = "You won!";
+            }
+        }, 1000);
+
+    } else {
+        btn.classList.add("wrong");
+        document.getElementById("status").textContent = "Wrong answer. Game over.";
+        disableButtons();
     }
-];
+}
+
+function disableButtons() {
+    document.querySelectorAll(".answer-btn").forEach(btn => btn.disabled = true);
+}
+
+document.querySelectorAll(".answer-btn").forEach(btn => {
+    btn.addEventListener("click", () => checkAnswer(btn.id));
+});
+
+loadQuestion();
