@@ -35,5 +35,6 @@ body {
 }
 
 .wrong {
-    background: red !important;
+    background: #ff3333 !important;
+    color: white !important;
 }
