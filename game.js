@@ -1,3 +1,39 @@
+function shuffleAnswers(question) {
+    const entries = Object.entries(question.answers);
+    const correctLetter = question.correct;
+
+    // Find the correct answer text
+    const correctText = question.answers[correctLetter];
+
+    // Shuffle the answer entries
+    for (let i = entries.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [entries[i], entries[j]] = [entries[j], entries[i]];
+    }
+
+    // Rebuild answers object with new A/B/C/D order
+    const newAnswers = {};
+    const letters = ["A", "B", "C", "D"];
+
+    entries.forEach((entry, index) => {
+        newAnswers[letters[index]] = entry[1];
+    });
+
+    // Find new correct letter
+    let newCorrect = "";
+    for (const [letter, text] of Object.entries(newAnswers)) {
+        if (text === correctText) {
+            newCorrect = letter;
+            break;
+        }
+    }
+
+    return {
+        ...question,
+        answers: newAnswers,
+        correct: newCorrect
+    };
+}
 let currentIndex = 0;
 let gameOver = false;
 let used5050 = false;
