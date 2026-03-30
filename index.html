@@ -7,21 +7,45 @@
 </head>
 <body>
 
-    <div id="game-container">
-        <h1>AMT Millionaire</h1>
-        <div id="question-box">
-            <p id="question-text">Loading question...</p>
+    <div id="app">
+        <div id="game-container">
+            <h1>AMT Millionaire</h1>
+
+            <div id="lifelines">
+                <button id="lifeline-5050" class="lifeline-btn">50/50</button>
+                <button id="lifeline-audience" class="lifeline-btn">Ask the Audience</button>
+                <button id="lifeline-friend" class="lifeline-btn">Phone a Friend</button>
+            </div>
+
+            <div id="question-box">
+                <p id="question-text">Loading question...</p>
+            </div>
+
+            <div id="answers">
+                <button class="answer-btn" id="A" data-letter="A"></button>
+                <button class="answer-btn" id="B" data-letter="B"></button>
+                <button class="answer-btn" id="C" data-letter="C"></button>
+                <button class="answer-btn" id="D" data-letter="D"></button>
+            </div>
+
+            <p id="status"></p>
+            <p id="lifeline-result"></p>
+
+            <button id="restart-btn" class="hidden">Play Again</button>
         </div>
 
-        <div id="answers">
-            <button class="answer-btn" id="A"></button>
-            <button class="answer-btn" id="B"></button>
-            <button class="answer-btn" id="C"></button>
-            <button class="answer-btn" id="D"></button>
+        <div id="ladder-container">
+            <h2>Prize Ladder</h2>
+            <ol id="money-ladder">
+                <!-- Filled by JS -->
+            </ol>
         </div>
-
-        <p id="status"></p>
     </div>
+
+    <!-- Simple sounds -->
+    <audio id="sound-correct" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+    <audio id="sound-wrong" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
+    <audio id="sound-final" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
 
     <script src="questions.js"></script>
     <script src="game.js"></script>
