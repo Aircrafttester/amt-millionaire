@@ -32,11 +32,12 @@ function checkAnswer(letter) {
             }
         }, 1000);
 
-    } else {
-        btn.classList.add("wrong");
-        document.getElementById("status").textContent = "Wrong answer. Game over.";
-        disableButtons();
-    }
+ } else {
+    btn.classList.add("wrong");
+    document.getElementById("status").textContent = "Wrong answer. Game over.";
+    disableButtons();   // ← Add this line
+}
+
 }
 
 function disableButtons() {
